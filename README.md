@@ -17,12 +17,14 @@ A RESTful subscription platform built with Laravel 12, mail queues, and scalable
 ```bash
    git clone https://github.com/your-username/subscription-api.git
    cd subscription-api
+```
 
 2. Install dependencies:
 ```bash
    composer install
    cp .env.example .env
    php artisan key:generate
+```
 
 🧪 API Endpoints
 
