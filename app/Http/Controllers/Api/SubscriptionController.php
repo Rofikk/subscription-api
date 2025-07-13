@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\Subscriber;
 use App\Models\Website;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class SubscriptionController extends Controller
         ]);
 
         // Cek jika sudah subscribe
-        if ($website->subscriber()->where('subscriber_id', $subscriber->id)->exists()) {
+        if ($website->subscribers()->where('subscriber_id', $subscriber->id)->exists()) {
             return response()->json([
                 'message' => 'Already subscribed to this website.'
             ], 200);

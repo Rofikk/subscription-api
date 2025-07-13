@@ -4,59 +4,27 @@ namespace App\Mail;
 
 use App\Models\Post;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
 class PostPublished extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $post;
+    public Post $post;
 
-    /**
-     * Create a new message instance.
-     */
     public function __construct(Post $post)
     {
         $this->post = $post;
     }
 
-    /**
-     * Get the message envelope.
-     */
-    public function envelope(): Envelope
+    public function build(): self
     {
-        return new Envelope(
-            subject: 'Post Published',
-        );
-    }
-
-    /**
-     * Get the message content definition.
-     */
-    public function content(): Content
-    {
-        return new Content(
-            view: 'view.name',
-        );
-    }
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
-    public function attachments(): array
-    {
-        return [];
-    }
-
-    public function build()
-    {
-        return $this->subject("New post from {$this->post->website->name}")
-                    ->view('emails.post');
+        return $this->subject('New Post from ' . $this->post->website->name)
+                    ->view('emails.post')
+                    ->with([
+                        'title' => $this->post->title,
+                        'description' => $this->post->description,
+                    ]);
     }
 }

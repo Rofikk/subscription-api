@@ -1,3 +1,11 @@
-<h2>{{ $post->title }}</h2>
-<p>{{ $post->description }}</p>
-<p><i>From: {{ $post->website->name }}</i></p>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>New Post</title>
+</head>
+<body>
+    <h2>{{ $title }}</h2>
+    <p>{{ $description }}</p>
+</body>
+</html>
